@@ -1,29 +1,19 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class FCFS {
+    // İşlemlerin listesi
+    private List<Process> queue1;
+  
+    public FCFS(List<Process> queue1) {
+      this.queue1 = queue1;
+    }
 
-    private List<Process> processes;
-  
-    public FCFS(List<Process> processes)
-    {
-      this.processes = processes;
-    }
-  
-    public void schedule()
-    {
-      Collections.sort(processes, (p1, p2) -> p1.arrivalTime - p2.arrivalTime);
-  
-      int currentTime = 0;
-  
-      for (Process p : processes) {
-        if (currentTime < p.arrivalTime) 
-        {
-          currentTime = p.arrivalTime;
+    public void run() {
+        // İşlemlerin listesi döngüsü
+        for (Process process : queue1) {
+          // İşlemin çalıştırılması
+          process.run();
         }
-        currentTime += p.duration;
-        
-        System.out.println("Process " + p.id + ": start at " + (currentTime - p.duration) + ", end at " + currentTime);
-      }
     }
-  }
+}
