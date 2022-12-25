@@ -11,7 +11,7 @@ public class RoundRobin {
       this.queue4 = queue4;
       this.quantum = quantum;
     }
-
+    
     // Görevlendiriciyi çalıştırır
     public void run() {
         for (Process process : queue4) {
