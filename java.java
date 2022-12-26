@@ -34,7 +34,7 @@ public class java {
                 FCFS fcfs = new FCFS(queue1);
                 RoundRobin robin = new RoundRobin(queue4);
                 fcfs.run();
-                robin.run();
+                robin.run(); //round robin 
                 }
             //System.out.println(queue1);
         } catch (IOException e) {
