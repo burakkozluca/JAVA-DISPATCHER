@@ -3,43 +3,110 @@ import java.util.*;
 
 public class java {
     
-    static float saniye = 0;
+    static float timer = 0;
     public static void main(String[] args) {
 
+        
         String filePath = "giris.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
 
-            List<Process> queue1 = new LinkedList<>();
-            List<Process> queue2 = new LinkedList<>();
-            List<Process> queue3 = new LinkedList<>();
-            List<Process> queue4 = new LinkedList<>();
+            Queue input_queue = new Queue();
+            Queue real_time_queue = new Queue();
+            Queue user_job_queue = new Queue();
+            Queue priority_one_queue = new Queue();
+            Queue priority_two_queue = new Queue();
+            Queue priority_three_queue = new Queue();
 
+            int id = 0;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(", ");
 
-                int a = Integer.parseInt(parts[0]);
-                int b = Integer.parseInt(parts[1]);
-                int c = Integer.parseInt(parts[2]);
+                int arrival_time = Integer.parseInt(parts[0]);
+                int priority = Integer.parseInt(parts[1]);
+                int process_time = Integer.parseInt(parts[2]);
 
-                Process p = new Process(saniye, a, b, c);
-                if(p.priority == 0)
-                    queue1.add(p);
-                else if(p.priority == 1)
-                    queue2.add(p);
-                else if(p.priority == 2)
-                    queue3.add(p);
-                else if(p.priority == 3)
-                    queue4.add(p);
-                FCFS fcfs = new FCFS(queue1);
-                RoundRobin robin = new RoundRobin(queue4);
-                fcfs.run();
-                robin.run(); //round robin 
+                Process p = new Process(arrival_time, priority, process_time, id); //saniye ekle
+
+                input_queue.enqueue(p);
+                id++;
+                // if(p.priority == 0)
+                //     queue1.add(p);
+                // else if(p.priority == 1)
+                //     queue2.add(p);
+                // else if(p.priority == 2)
+                //     queue3.add(p);
+                // else if(p.priority == 3)
+                //     queue4.add(p);
+                // FCFS fcfs = new FCFS(queue1);
+                // RoundRobin robin = new RoundRobin(queue4);
+                // fcfs.run();
+                // robin.run();
+            }
+            while (!input_queue.isEmpty() || !real_time_queue.isEmpty() || !user_job_queue.isEmpty() || !priority_one_queue.isEmpty() || !priority_two_queue.isEmpty() || !priority_three_queue.isEmpty())
+            {
+                while (!input_queue.isEmpty() && input_queue.peek().arrival_time <= timer) {
+                    
+                    if (input_queue.peek().priority == 0) {
+                        real_time_queue.enqueue(input_queue.peek());
+                        input_queue.dequeue();
+                        real_time_queue.peek().run();
+                    }
+                    else {
+                        user_job_queue.enqueue(input_queue.peek());
+                        input_queue.dequeue();
+                    }
                 }
-            //System.out.println(queue1);
-        } catch (IOException e) {
+
+                while(!user_job_queue.isEmpty())
+                {
+                    switch(user_job_queue.peek().priority)
+                    {
+                        case 1:
+                            priority_one_queue.enqueue(user_job_queue.peek());
+                            user_job_queue.dequeue();
+                            priority_one_queue.peek().run();
+                            break;
+                        case 2:
+                            priority_two_queue.enqueue(user_job_queue.peek());
+                            user_job_queue.dequeue();
+                            priority_one_queue.peek().run();
+                            break;
+                        default:
+                            priority_three_queue.enqueue(user_job_queue.peek());
+                            user_job_queue.dequeue();
+                            priority_one_queue.peek().run();
+                            break;
+                    }
+                }
+                //bu aşağısı daha olmadı
+                if(current_process)
+                {
+                    
+                }
+                if((!real_time_queue.isEmpty() || !priority_one_queue.isEmpty() || !priority_two_queue.isEmpty() || !priority_three_queue.isEmpty()) && (!current_process))
+                {
+                    if (!real_time_queue.isEmpty())	// Check real-time queue first
+                    {
+                        current_process = real_time_queue;
+	                    real_time_queue.dequeue();
+                    }
+                    else if(!priority_one_queue.isEmpty())
+                    {
+
+                    }
+   
+                }
+
+                sleep(1);
+                timer++;
+            }
+            
+        } 
+        catch (IOException e) {
             e.printStackTrace();
         }
+        
     }
 }
 

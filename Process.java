@@ -2,15 +2,17 @@ import java.util.*;
 import java.io.*;
 
 public class Process {
-    public int id;
+    public int arrival_time;
     public int priority;
-    public int time;
+    public int process_time;
+    public int id;
     public float saniye;
 
-    public Process(float saniye,int id, int priority, int time) {
-        this.id = id;
+    public Process(int arrival_time, int priority, int process_time, int id, float saniye) {
+        this.arrival_time = arrival_time;
         this.priority = priority;
-        this.time = time;
+        this.process_time= process_time;
+        this.id = id;
         this.saniye = saniye;
     }
     public int getId() {
@@ -20,17 +22,21 @@ public class Process {
         return priority;
     }
     public int getTime() {
-        return time;
+        return process_time;
     }
 
     public void run() {
-        System.out.println("\033[32m"+ saniye + "sn proses başladı" + "       (id:" + id + "  öncelik:" + priority + "  kalan süre:" + time + "sn)" + "\033[0m");
+        System.out.println("\033[32m"+ saniye + "sn proses başladı" + "       (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)" + "\033[0m");
         // İşlem süresi kadar bekle
-        while (time > 0) {
+        while (process_time > 0) {
             saniye += 1;
-            System.out.println("\033[33m"+ saniye + "sn proses yürütülüyor" + "   (id:" + id + "  öncelik:" + priority + "  kalan süre:" + time + "sn)" + "\033[0m");
-            time -= 1;
+            if(priority >= 1 && )
+            {
+                
+            }
+            System.out.println("\033[33m"+ saniye + "sn proses yürütülüyor" + "   (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)" + "\033[0m");
+            process_time -= 1;
         }
-        System.out.println("\033[31m"+ ++saniye + "sn proses sonlandı" + "      (id:" + id + "  öncelik:" + priority + "  kalan süre:" + time + "sn)"+ "\033[0m");
-      }
+        System.out.println("\033[31m"+ ++saniye + "sn proses sonlandı" + "      (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)"+ "\033[0m");
+    }
 }
