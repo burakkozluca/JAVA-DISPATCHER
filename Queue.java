@@ -1,10 +1,9 @@
-import java.util.Queue;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Queue {
-  private Queue<Process> queue;
+  private Queue queue;
 
-  public ProcessQueue() {
+  public Queue() {
     queue = new LinkedList<>();
   }
 
@@ -13,7 +12,7 @@ public class Queue {
   }
 
   public Process dequeue() {
-    return queue.remove();
+    return queue.poll();
   }
 
   public Process peek() {
@@ -22,5 +21,17 @@ public class Queue {
 
   public boolean isEmpty() {
     return queue.isEmpty();
+  }
+
+  public void iterateList() {
+    // Bir Iterator objesi oluşturun
+    Iterator<Object> iterator = list.iterator();
+
+    // Elemanlar arasında dolaşın
+    while (iterator.hasNext()) {
+        Object element = iterator.next();
+        // Elemanı işleyin (yazdırın, değiştirin, vb.)
+        System.out.println(element);
+    }
   }
 }

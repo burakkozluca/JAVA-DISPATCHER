@@ -45,7 +45,7 @@ public class Process {
     public void fcfsrun()
     {
         System.out.println("\033[32m"+ saniye + "sn proses başladı" + "       (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)" + "\033[0m");
-        
+
         while (process_time > 0) {
             saniye += 1;
             System.out.println("\033[33m"+ saniye + "sn proses yürütülüyor" + "   (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)" + "\033[0m");
@@ -54,3 +54,4 @@ public class Process {
         System.out.println("\033[31m"+ ++saniye + "sn proses sonlandı" + "      (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)"+ "\033[0m");
     }
 }
+

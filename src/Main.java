@@ -1,8 +1,6 @@
 import java.util.*;
 import java.io.*;
-
-public class java {
-    
+public class Main {
     static float timer = 0;
     public static void main(String[] args) {
 
@@ -79,7 +77,7 @@ public class java {
                     }
                 }
                 while (!input_queue.isEmpty() && input_queue.peek().arrival_time <= timer) {
-                    
+
                     if (input_queue.peek().priority == 0) {
                         real_time_queue.enqueue(input_queue.peek());
                         input_queue.dequeue();
@@ -114,11 +112,10 @@ public class java {
                 }
                 timer++;
             }
-        } 
+        }
         catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 }
-
