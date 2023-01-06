@@ -79,7 +79,8 @@ public class Main {
                             {
                                 current_process.peek().priority = 3;
                             }
-                            current_process.peek().suspend(timer);
+                            suspend_queue.add(current_process.peek());
+                            current_process.peek().suspend(timer,suspend_queue.peek().id);
                             switch (current_process.peek().priority) {
                                 case 1:
                                     priority_one_queue.add(current_process.peek());
@@ -115,9 +116,11 @@ public class Main {
                         priority_three_queue.remove();
                     }
                 }
-
                 if(!current_process.isEmpty())
                     current_process.peek().run(timer);
+                if(!suspend_queue.isEmpty() && (timer == suspend_queue.peek().suspend_time + 20)){
+                    suspend_queue.peek().zaman_asimi(timer,suspend_queue.peek().id);
+                }
                 timer++;
             }
         }
