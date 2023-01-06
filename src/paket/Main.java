@@ -1,9 +1,10 @@
+package paket;
 import java.util.*;
 import java.io.*;
 public class Main {
     public static void main(String[] args) {
 
-        String filePath = "/Users/burakkozluca/Desktop/isletimodev/src/giris.txt";
+        String filePath = args[0];
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int timer = 0;
@@ -74,13 +75,13 @@ public class Main {
                     {
                         if((!input_queue.isEmpty() || !real_time_queue.isEmpty() || !user_job_queue.isEmpty() || !priority_one_queue.isEmpty() || !priority_two_queue.isEmpty() || !priority_three_queue.isEmpty()) && current_process.peek().priority != 0)
                         {
-                            //prosesi askÄ±ya alma kodu yazÄ±lacak
-                            if(++current_process.peek().priority > 3) //Ã¶ncelik dÃ¼ÅŸÃ¼rme
+                            //prosesi askýya alma kodu yazýlacak
+                            if(++current_process.peek().priority > 3) //öncelik düþürme
                             {
                                 current_process.peek().priority = 3;
                             }
                             suspend_queue.add(current_process.peek());
-                            current_process.peek().suspend(timer,suspend_queue.peek().id);
+                            current_process.peek().suspend(timer,current_process.peek().id);
                             switch (current_process.peek().priority) {
                                 case 1:
                                     priority_one_queue.add(current_process.peek());
@@ -119,7 +120,9 @@ public class Main {
                 if(!current_process.isEmpty())
                     current_process.peek().run(timer);
                 if(!suspend_queue.isEmpty() && (timer == suspend_queue.peek().suspend_time + 20)){
-                    suspend_queue.peek().zaman_asimi(timer,suspend_queue.peek().id);
+                    
+                	suspend_queue.peek().zaman_asimi(timer,suspend_queue.peek().id);
+                	suspend_queue.remove();
                 }
                 timer++;
             }
