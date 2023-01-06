@@ -6,12 +6,14 @@ public class Process {
     public int process_time;
     public int id;
     public int baslangic;
+    public int suspend_time;
     public Process(int arrival_time, int priority, int process_time, int id) {
         this.arrival_time = arrival_time;
         this.priority = priority;
         this.process_time= process_time;
         this.id = id;
         this.baslangic = process_time;
+        this.suspend_time = process_time;
     }
     public int getId() {
         return id;
@@ -24,6 +26,7 @@ public class Process {
     }
 
     public void run(int saniye) {
+
         if(getTime() == baslangic) {
             System.out.println("\033[32m" + saniye + "sn proses başladı" + "       (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)" + "\033[0m");
         }
@@ -48,8 +51,13 @@ public class Process {
         System.out.println("\033[31m"+ saniye + "sn proses sonlandı" + "      (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)"+ "\033[0m");
     }
 
-    public void suspend(int saniye)
+    public void suspend(int saniye,int suspend_id)
     {
-        System.out.println("\033[34m"+ saniye + "sn proses askıda" + "        (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)" + "\033[0m");
+        id = suspend_id;
+            System.out.println("\033[34m" + saniye + "sn proses askıda" + "        (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)" + "\033[0m");
+        suspend_time = saniye;
+    }
+    public void zaman_asimi(int saniye, int suspend_id){
+        System.out.println("\033[36m" + saniye + "sn proses ZamanAşımı" + "    (id:" + id + "  öncelik:" + priority + "  kalan süre:" + process_time + "sn)" + "\033[0m");
     }
 }
