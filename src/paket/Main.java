@@ -26,7 +26,7 @@ public class Main {
                 int priority = Integer.parseInt(parts[1]);
                 int process_time = Integer.parseInt(parts[2]);
 
-                Process p = new Process(arrival_time, priority, process_time, id); //saniye ekle
+                Process p = new Process(arrival_time, priority, process_time, id); 
 
                 input_queue.add(p);
                 id++;
@@ -37,8 +37,8 @@ public class Main {
                 while (!input_queue.isEmpty() && input_queue.peek().arrival_time <= timer) {
 
                     if (input_queue.peek().priority == 0) {
-                        real_time_queue.add(input_queue.peek()); //inputun ilk prosesini reale at
-                        input_queue.remove(); //inputun ilk prosesini sil
+                        real_time_queue.add(input_queue.peek()); 
+                        input_queue.remove();
                     }
                     else {
                         user_job_queue.add(input_queue.peek());
@@ -71,12 +71,12 @@ public class Main {
                         current_process.peek().remove(timer);
                         current_process.remove();
                     }
-                    else  //process bitmediyse
+                    else  
                     {
                         if((!input_queue.isEmpty() || !real_time_queue.isEmpty() || !user_job_queue.isEmpty() || !priority_one_queue.isEmpty() || !priority_two_queue.isEmpty() || !priority_three_queue.isEmpty()) && current_process.peek().priority != 0)
                         {
-                            //prosesi askýya alma kodu yazýlacak
-                            if(++current_process.peek().priority > 3) //öncelik düþürme
+                            
+                            if(++current_process.peek().priority > 3) 
                             {
                                 current_process.peek().priority = 3;
                             }
