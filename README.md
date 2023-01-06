@@ -1,5 +1,5 @@
 # JAVA-MINISHELL
 ### 🛠️ Çalıştırma:
 ```
-./temizle_beni.sh 
+java -jar dispatcher.jar giris.txt
 ```
