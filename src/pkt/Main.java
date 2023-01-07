@@ -3,6 +3,7 @@ import java.util.*;
 import java.io.*;
 public class Main {
     public static void main(String[] args) {
+        String filePath = args[0];
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int timer = 0; //Sistem saniyesi
@@ -115,7 +116,7 @@ public class Main {
                 if (!current_process.isEmpty())
                     current_process.peek().run(timer); //Proses calistirilir.
                 //aski kuyrugu bos degilse ve prosesin askiya alinma zamanindan 20 saniye gecmisse
-                if (!suspend_queue.isEmpty() && (timer == suspend_queue.peek().suspend_time + 20)) {
+                if (!current_process.isEmpty() && current_process.peek().priority != 0 && real_time_queue.isEmpty() && !suspend_queue.isEmpty() && (timer == suspend_queue.peek().suspend_time + 20)) {
                     suspend_queue.peek().zaman_asimi(timer, suspend_queue.peek().id); //proses zaman asimina ugrar.
                     //zaman asimina ugrayan proses priority_two_queue'dan silinir.
                     for (Iterator<Process> process = priority_two_queue.iterator(); process.hasNext(); ) {
@@ -132,6 +133,18 @@ public class Main {
                         }
                     }
                     suspend_queue.remove(); //askidaki proses silinir.
+                }
+                if(!current_process.isEmpty() && current_process.peek().priority != 0 && real_time_queue.isEmpty() && !priority_one_queue.isEmpty() && (timer > priority_one_queue.peek().arrival_time + 20)){
+                    priority_one_queue.peek().zaman_asimi(timer,priority_one_queue.peek().id);
+                    priority_one_queue.remove();
+                }
+                if(!current_process.isEmpty() && current_process.peek().priority != 0 && real_time_queue.isEmpty() && !priority_two_queue.isEmpty() && (timer > priority_two_queue.peek().arrival_time + 20)){
+                    priority_two_queue.peek().zaman_asimi(timer,priority_two_queue.peek().id);
+                    priority_two_queue.remove();
+                }
+                if(!current_process.isEmpty() && current_process.peek().priority != 0 && real_time_queue.isEmpty() && !priority_three_queue.isEmpty() && (timer > priority_three_queue.peek().arrival_time + 20)){
+                    priority_three_queue.peek().zaman_asimi(timer,priority_three_queue.peek().id);
+                    priority_three_queue.remove();
                 }
                 timer++; //sistem saniyesi arttirilir.
             }

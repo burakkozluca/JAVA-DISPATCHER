@@ -1,4 +1,6 @@
 package pkt;
+import java.util.*;
+import java.io.*;
 public class Process {
     public int arrival_time;
     public int priority;
