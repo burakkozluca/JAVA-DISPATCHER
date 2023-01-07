@@ -75,8 +75,8 @@ public class Main {
                     {
                         if((!input_queue.isEmpty() || !real_time_queue.isEmpty() || !user_job_queue.isEmpty() || !priority_one_queue.isEmpty() || !priority_two_queue.isEmpty() || !priority_three_queue.isEmpty()) && current_process.peek().priority != 0)
                         {
-                            //prosesi askýya alma kodu yazýlacak
-                            if(++current_process.peek().priority > 3) //öncelik düþürme
+                            //prosesi askï¿½ya alma kodu yazï¿½lacak
+                            if(++current_process.peek().priority > 3) //ï¿½ncelik dï¿½ï¿½ï¿½rme
                             {
                                 current_process.peek().priority = 3;
                             }
@@ -120,9 +120,20 @@ public class Main {
                 if(!current_process.isEmpty())
                     current_process.peek().run(timer);
                 if(!suspend_queue.isEmpty() && (timer == suspend_queue.peek().suspend_time + 20)){
-                    
-                	suspend_queue.peek().zaman_asimi(timer,suspend_queue.peek().id);
-                	suspend_queue.remove();
+                    suspend_queue.peek().zaman_asimi(timer,suspend_queue.peek().id);
+                    for (Iterator<Process> process = priority_two_queue.iterator(); process.hasNext(); ) {
+                        Process process1 = process.next();
+                        if (process1.id == suspend_queue.peek().id) {
+                            process.remove();
+                        }
+                    }
+                    for (Iterator<Process> process = priority_three_queue.iterator(); process.hasNext(); ) {
+                        Process process1 = process.next();
+                        if (process1.id == suspend_queue.peek().id) {
+                            process.remove();
+                        }
+                    }
+                    suspend_queue.remove();
                 }
                 timer++;
             }
