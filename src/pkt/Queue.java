@@ -3,11 +3,14 @@ package pkt;
 import java.util.*;
 
 public class Queue {
-    private Queue<Process> queue;
-
-    public Kuyruk() {
-        queue = new LinkedList<>();
+    private LinkedList<Process> queue ;
+    
+    public Queue()
+    {
+    	queue = new LinkedList<>();
     }
+    
+    
 
     public void enqueue(Process process) {
         queue.add(process); //Kuyruga elaman ekleme
