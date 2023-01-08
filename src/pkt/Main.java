@@ -16,6 +16,8 @@ public class Main {
             LinkedList<Process> priority_two_queue = new LinkedList<Process>();
             LinkedList<Process> priority_three_queue = new LinkedList<Process>();
             LinkedList<Process> suspend_queue = new LinkedList<Process>();
+            
+            String renk="";
 
             int id = 0; //Proses id degiskeni olusturuldu.
             while ((line = br.readLine()) != null) //Tüm giris.txt satir satir okundu.
@@ -24,8 +26,28 @@ public class Main {
                 int arrival_time = Integer.parseInt(parts[0]); //İlgili argumanlar ilgili degiskenlere atandi.
                 int priority = Integer.parseInt(parts[1]);
                 int process_time = Integer.parseInt(parts[2]);
+                
+                //renk
+                
+                switch (id%5) {
+                case 0:
+                	renk = "31m";
+                    break;
+                case 1:
+                	renk = "32m";
+                    break;
+                case 2:
+                	renk = "33m";
+                    break;
+                case 3:
+                	renk = "34m";
+                    break;
+                default:
+                	renk = "35m";
+                    break;
+            }
 
-                Process p = new Process(arrival_time, priority, process_time, id); //Proses olusturuldu
+                Process p = new Process(arrival_time, priority, process_time, id,renk); //Proses olusturuldu
 
                 input_queue.add(p); //olusturulan proses input_queue'ya eklendi.
                 id++;
