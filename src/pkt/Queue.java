@@ -10,20 +10,19 @@ public class Queue {
     }
 
     public void enqueue(Process process) {
-        queue.add(process);
-
+        queue.add(process); //Kuyruga elaman ekleme
     }
 
     public  Process dequeue() {
-        return queue.poll(); //kaldırırsa true ya da false remove exception fırlatıyor
+        return queue.poll(); //Kuyruktan eleman silme
     }
 
     public Process peek() {
-        return queue.peek();
+        return queue.peek(); //Kuyrugun ilk elemanini getirme
     }
 
     public boolean isEmpty() {
-        return queue.isEmpty();
+        return queue.isEmpty(); //Kuyruk bos mu degil mi?
     }
 }
 

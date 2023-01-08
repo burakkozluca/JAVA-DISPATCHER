@@ -25,27 +25,27 @@ public class Process {
     public void run(int saniye) {
         //proses yeni basliyorsa
         if(getTime() == baslangic) {
-            System.out.println("\033[32m" + saniye + "sn proses basladi" + "       (id:" + id + "  oncelik:" + priority + "  kalan sure:" + process_time + "sn)" + "\033[0m");
+            System.out.println("\033[32m" + saniye + ".0000 sn proses basladi" + "       (id:" + id + "  oncelik:" + priority + "  kalan sure:" + process_time + "sn)" + "\033[0m");
         }
         else if(getTime() != 0)
         {
-            System.out.println("\033[33m"+ saniye + "sn proses yurutuluyor" + "   (id:" + id + "  oncelik:" + priority + "  kalan sure:" + process_time + "sn)" + "\033[0m");
+            System.out.println("\033[33m"+ saniye + ".0000 sn proses yurutuluyor" + "   (id:" + id + "  oncelik:" + priority + "  kalan sure:" + process_time + "sn)" + "\033[0m");
         }
            
     }
     public void remove(int saniye) //proses bitmisse calisan fonksiyon
     {
-        System.out.println("\033[31m"+ saniye + "sn proses sonlandi" + "      (id:" + id + "  oncelik:" + priority + "  kalan sure:" + process_time + "sn)"+ "\033[0m");
+        System.out.println("\033[31m"+ saniye + ".0000 sn proses sonlandi" + "      (id:" + id + "  oncelik:" + priority + "  kalan sure:" + process_time + "sn)"+ "\033[0m");
     }
 
     public void suspend(int saniye,int suspend_id) //proses askiya alma fonksiyonu
     {
         id = suspend_id;
-        System.out.println("\033[34m" + saniye + "sn proses askida" + "        (id:" + id + " oncelik:" + priority + "  kalan sure:" + process_time + "sn)" + "\033[0m");
+        System.out.println("\033[34m" + saniye + ".0000 sn proses askida" + "        (id:" + id + " oncelik:" + priority + "  kalan sure:" + process_time + "sn)" + "\033[0m");
         suspend_time = saniye;
     }
     public void zaman_asimi(int saniye, int suspend_id) //zaman asimi fonksiyonu
     {
-        System.out.println("\033[36m" + saniye + "sn proses Zaman Asimi" + "    (id:" + id + "  oncelik:" + priority + "  kalan sure:" + process_time + "sn)" + "\033[0m");
+        System.out.println("\033[36m" + saniye + ".0000 sn proses Zaman Asimi" + "    (id:" + id + "  oncelik:" + priority + "  kalan sure:" + process_time + "sn)" + "\033[0m");
     }
 }
